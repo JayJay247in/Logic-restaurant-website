@@ -8,7 +8,7 @@ const CateringPage = () => {
       {/* 1. Hero Section */}
       <section className="relative h-80 sm:h-96">
         <Image
-          src="/images/catering-banner.jpg"
+          src="/images/catering-banner.jpeg"
           alt="A beautifully arranged catering buffet table"
           fill
           className="object-cover"
