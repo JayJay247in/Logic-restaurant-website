@@ -1,12 +1,13 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect } from 'react';
+
+import { useFormStatus } from 'react-dom';
+
 import { createInquiry, ContactFormState } from '@/app/contact/actions';
-import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { MapPin, Phone, Mail } from 'lucide-react';
 
-// Submit button component to handle the pending state
 function SubmitButton() {
   const { pending } = useFormStatus();
 
@@ -20,7 +21,8 @@ function SubmitButton() {
 
 const ContactPage = () => {
   const initialState: ContactFormState = { message: '', success: false };
-  const [state, formAction] = useFormState(createInquiry, initialState);
+  // 2. HOOK RENAME: useFormState is now useActionState
+  const [state, formAction] = useActionState(createInquiry, initialState);
 
   useEffect(() => {
     if (state.success) {

@@ -1,10 +1,9 @@
 'use server';
 
 import { z } from 'zod';
-import { supabase } from '@/lib/supabaseClient';
+import { createServerClient } from '@/lib/supabaseServer'; // 1. IMPORT our new server client
 import { revalidatePath } from 'next/cache';
 
-// Define the validation schema for the contact form
 const contactSchema = z.object({
   full_name: z.string().min(3, 'Full name must be at least 3 characters long.'),
   email: z.string().email('Please provide a valid email address.'),
@@ -12,19 +11,15 @@ const contactSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters long.').max(1000, 'Message cannot exceed 1000 characters.'),
 });
 
-// Define the shape of the state our action will return
 export type ContactFormState = {
   message: string;
   errors?: Record<string, string[]>;
   success: boolean;
 };
 
-// The Server Action for the contact form
 export async function createInquiry(prevState: ContactFormState, formData: FormData): Promise<ContactFormState> {
-  // 1. Validate the incoming form data
   const validatedFields = contactSchema.safeParse(Object.fromEntries(formData.entries()));
   
-  // 2. If validation fails, return the errors
   if (!validatedFields.success) {
     return {
       message: 'Validation failed. Please review your entries.',
@@ -33,8 +28,11 @@ export async function createInquiry(prevState: ContactFormState, formData: FormD
     };
   }
 
-  // 3. If validation succeeds, attempt to insert into the database
+  // 2. CREATE an instance of the server client INSIDE the action
+  const supabase = createServerClient();
+  
   try {
+    // 3. PERFORM the insert operation
     const { error } = await supabase
       .from('contact_inquiries')
       .insert([validatedFields.data]);
@@ -45,16 +43,14 @@ export async function createInquiry(prevState: ContactFormState, formData: FormD
     
     revalidatePath('/contact');
     
-    // 4. Return a success response
     return {
       message: 'Thank you for your message! We will get back to you shortly.',
       success: true,
     };
     
-  } catch (e) {
-    // 5. Handle any potential database errors
+  } catch (e: any) {
     return {
-      message: 'Database error. Failed to send message, please try again.',
+      message: `Database error: ${e.message}`, // Provide a more detailed error
       success: false,
     };
   }

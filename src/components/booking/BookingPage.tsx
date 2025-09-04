@@ -1,11 +1,12 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect } from 'react';
+
+import { useFormStatus } from 'react-dom';
+
 import { createBooking, FormState } from '@/app/booking/actions';
-import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-// This is a new component to handle the submit button's pending state
 function SubmitButton() {
   const { pending } = useFormStatus();
 
@@ -19,14 +20,14 @@ function SubmitButton() {
 
 const BookingPage = () => {
   const initialState: FormState = { message: '', success: false };
-  const [state, formAction] = useFormState(createBooking, initialState);
+  // 2. HOOK RENAME: useFormState is now useActionState
+  const [state, formAction] = useActionState(createBooking, initialState);
 
-  // Use useEffect to show toast notifications based on the form state
   useEffect(() => {
     if (state.success) {
       toast.success(state.message);
     } else if (state.message && state.errors) {
-      // Don't show an error toast for validation, as errors are shown inline
+      // Inline errors are shown, so no need for a toast here.
     } else if (state.message) {
       toast.error(state.message);
     }

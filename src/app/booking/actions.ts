@@ -1,10 +1,9 @@
 'use server';
 
 import { z } from 'zod';
-import { supabase } from '@/lib/supabaseClient';
+import { createServerClient } from '@/lib/supabaseServer'; // 1. IMPORT our new server client
 import { revalidatePath } from 'next/cache';
 
-// Define the shape of our form data using a Zod schema
 const bookingSchema = z.object({
   full_name: z.string().min(3, 'Full name must be at least 3 characters.'),
   email: z.string().email('Please enter a valid email address.'),
@@ -14,19 +13,15 @@ const bookingSchema = z.object({
   special_requests: z.string().max(500, 'Requests cannot exceed 500 characters.').optional(),
 });
 
-// Define the shape of the state that our action will return
 export type FormState = {
   message: string;
   errors?: Record<string, string[]>;
   success: boolean;
 };
 
-// This is the Server Action
 export async function createBooking(prevState: FormState, formData: FormData): Promise<FormState> {
-  // 1. Validate the form data against the Zod schema
   const validatedFields = bookingSchema.safeParse(Object.fromEntries(formData.entries()));
   
-  // 2. If validation fails, return the error messages
   if (!validatedFields.success) {
     return {
       message: 'Validation failed. Please check the fields.',
@@ -34,30 +29,31 @@ export async function createBooking(prevState: FormState, formData: FormData): P
       success: false,
     };
   }
+  
+  // 2. CREATE an instance of the server client INSIDE the action
+  const supabase = createServerClient();
 
-  // 3. If validation succeeds, attempt to insert the data into the database
   try {
+    // 3. PERFORM the insert operation
     const { error } = await supabase
       .from('bookings')
       .insert([validatedFields.data]);
 
     if (error) {
+      // This will now provide a more specific database error if one occurs
       throw new Error(error.message);
     }
     
-    // Invalidate the cache for a path if needed in the future
     revalidatePath('/booking');
     
-    // 4. Return a success message
     return {
       message: 'Thank you! Your booking has been received.',
       success: true,
     };
 
-  } catch (e) {
-    // 5. If there's a database error, return a generic error message
+  } catch (e: any) {
     return {
-      message: 'An unexpected error occurred. Please try again.',
+      message: `Database error: ${e.message}`, // Provide a more detailed error
       success: false,
     };
   }
