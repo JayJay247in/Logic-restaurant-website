@@ -28,7 +28,7 @@ const AboutPage = () => {
           </div>
           <div className="w-full h-80 sm:h-96 rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/images/about-story.jpg"
+              src="/images/about-story.jpeg"
               alt="Chefs meticulously preparing food in the kitchen"
               width={1200}
               height={800}
