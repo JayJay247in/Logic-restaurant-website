@@ -4,13 +4,22 @@ import { Sparkles, Leaf, UtensilsCrossed } from 'lucide-react';
 const AboutPage = () => {
   return (
     <div className="bg-white">
-      <section className="bg-black h-64 sm:h-80 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-wider">
-            About Logic Restaurant
-          </h1>
-        </div>
-      </section>
+      <section className="relative h-80 sm:h-96">
+                      <Image
+                          src="/images/about-banner.jpeg"
+                          alt="Angular view of Logic Restaurant"
+                          fill
+                          priority
+                          sizes="100vw"
+                          className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+                      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white p-4">
+                          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-wider">
+                              About Logic Restaurant
+                          </h1>
+                      </div>
+                  </section>
 
       <section className="py-16 sm:py-24">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

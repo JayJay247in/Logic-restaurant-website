@@ -5,7 +5,7 @@ import { Users, Wifi, Wind, Speaker, ParkingSquare } from 'lucide-react';
 const BanquetPage = () => {
     return (
         <div className="bg-white">
-            {/* 1. Banner Section */}
+            
             <section className="relative h-80 sm:h-96">
                 <Image
                     src="/images/banquet-banner.jpg"
