@@ -1,6 +1,6 @@
 # Logic Restaurant - A Full-Stack Next.js Application
 
-![Logic Restaurant Homepage](https://i.imgur.com/your-screenshot-url.png) <!-- It is highly recommended to take a screenshot of your finished homepage, upload it to a site like imgur.com, and paste the URL here. -->
+![Logic Restaurant Homepage](https://imgur.com/a/nk0Pwp8) <!-- It is highly recommended to take a screenshot of your finished homepage, upload it to a site like imgur.com, and paste the URL here. -->
 
 A modern, production-ready, and fully-featured full-stack website for a fictional restaurant named "Logic". This project is built from the ground up using the latest web technologies, demonstrating a complete development lifecycle from initial setup to final deployment.
 
