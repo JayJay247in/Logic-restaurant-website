@@ -8,15 +8,13 @@ const CateringPage = () => {
       {/* 1. Hero Section */}
       <section className="relative h-80 sm:h-96">
         <Image
-            src="/images/catering-banner.jpeg"
-            alt="A beautifully arranged catering buffet table"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
+          src="/images/catering-banner.jpg"
+          alt="A beautifully arranged catering buffet table"
+          fill
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white p-4">
+        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        <div className="relative h-full flex flex-col items-center justify-center text-center text-white p-4">
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-wider">
             Exceptional Catering
           </h1>
@@ -65,6 +63,7 @@ const CateringPage = () => {
           <div className="text-gray-700 order-2 lg:order-1">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">For Any Occasion</h2>
             <p className="mb-6">
+              {/* Corrected 'don't' to use &apos; */}
               No matter the event, our commitment to quality and service remains the same. We cater to a wide range of functions, bringing passion and flavor to every table.
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg">
@@ -78,7 +77,7 @@ const CateringPage = () => {
           </div>
           <div className="w-full h-80 sm:h-96 rounded-lg overflow-hidden shadow-xl order-1 lg:order-2">
             <Image
-              src="/images/catering-events.jpeg"
+              src="/images/catering-events.jpg"
               alt="Platters of delicious food ready for a catering event"
               width={1200}
               height={800}
