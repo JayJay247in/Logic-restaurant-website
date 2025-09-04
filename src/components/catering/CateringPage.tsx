@@ -11,10 +11,12 @@ const CateringPage = () => {
           src="/images/catering-banner.jpeg"
           alt="A beautifully arranged catering buffet table"
           fill
-          className="object-cover"
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-        <div className="relative h-full flex flex-col items-center justify-center text-center text-white p-4">
+        <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white p-4">
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-wider">
             Exceptional Catering
           </h1>
