@@ -77,7 +77,7 @@ const CateringPage = () => {
           </div>
           <div className="w-full h-80 sm:h-96 rounded-lg overflow-hidden shadow-xl order-1 lg:order-2">
             <Image
-              src="/images/catering-events.jpg"
+              src="/images/catering-events.jpeg"
               alt="Platters of delicious food ready for a catering event"
               width={1200}
               height={800}
