@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { createServerClient } from '@/lib/supabaseServer'; // 1. IMPORT our new server client
+import { supabase } from '@/lib/supabaseClient';
 import { revalidatePath } from 'next/cache';
 
 const bookingSchema = z.object({
@@ -29,18 +29,13 @@ export async function createBooking(prevState: FormState, formData: FormData): P
       success: false,
     };
   }
-  
-  // 2. CREATE an instance of the server client INSIDE the action
-  const supabase = createServerClient();
 
   try {
-    // 3. PERFORM the insert operation
     const { error } = await supabase
       .from('bookings')
       .insert([validatedFields.data]);
 
     if (error) {
-      // This will now provide a more specific database error if one occurs
       throw new Error(error.message);
     }
     
@@ -51,9 +46,14 @@ export async function createBooking(prevState: FormState, formData: FormData): P
       success: true,
     };
 
-  } catch (e: any) {
+  } catch (e) {
+    // Corrected, type-safe error handling
+    let errorMessage = 'An unexpected error occurred. Please try again.';
+    if (e instanceof Error) {
+      errorMessage = e.message;
+    }
     return {
-      message: `Database error: ${e.message}`, // Provide a more detailed error
+      message: errorMessage,
       success: false,
     };
   }

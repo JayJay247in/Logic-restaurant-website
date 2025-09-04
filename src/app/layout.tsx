@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+// 'Metadata' import has been removed
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -7,6 +7,8 @@ import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ["latin"] });
 
+// The 'metadata' object is still exported, which is the correct Next.js pattern.
+// We just don't need the 'Metadata' type import.
 export const metadata = {
   title: "Logic Restaurant",
   description: "A full-stack restaurant website built with Next.js",
@@ -20,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* 2. Add the Toaster component here */}
         <Toaster 
           position="top-center"
           toastOptions={{

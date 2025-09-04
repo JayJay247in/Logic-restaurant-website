@@ -91,7 +91,7 @@ const CateringPage = () => {
       {/* 4. Call to Action Section */}
       <section className="bg-gray-800 text-white">
         <div className="container mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl font-bold mb-4">Let's Create Your Perfect Event Menu</h2>
+          <h2 className="text-3xl font-bold mb-4">Let&apos;s Create Your Perfect Event Menu</h2>
           <p className="max-w-2xl mx-auto mb-8">
             Our catering specialists are ready to help you plan an unforgettable culinary experience.
           </p>

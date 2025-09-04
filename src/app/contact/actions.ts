@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { createServerClient } from '@/lib/supabaseServer'; // 1. IMPORT our new server client
+import { supabase } from '@/lib/supabaseClient';
 import { revalidatePath } from 'next/cache';
 
 const contactSchema = z.object({
@@ -28,11 +28,7 @@ export async function createInquiry(prevState: ContactFormState, formData: FormD
     };
   }
 
-  // 2. CREATE an instance of the server client INSIDE the action
-  const supabase = createServerClient();
-  
   try {
-    // 3. PERFORM the insert operation
     const { error } = await supabase
       .from('contact_inquiries')
       .insert([validatedFields.data]);
@@ -48,9 +44,14 @@ export async function createInquiry(prevState: ContactFormState, formData: FormD
       success: true,
     };
     
-  } catch (e: any) {
+  } catch (e) {
+    // Corrected, type-safe error handling
+    let errorMessage = 'Database error. Failed to send message, please try again.';
+    if (e instanceof Error) {
+      errorMessage = e.message;
+    }
     return {
-      message: `Database error: ${e.message}`, // Provide a more detailed error
+      message: errorMessage,
       success: false,
     };
   }
