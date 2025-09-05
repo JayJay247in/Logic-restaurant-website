@@ -6,5 +6,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <ContactPage />;
+  return (
+    <section className="pt-16">
+      <ContactPage />
+    </section>
+  );
 }

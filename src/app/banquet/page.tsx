@@ -6,5 +6,9 @@ export const metadata = {
 };
 
 export default function Page() {
-    return <BanquetPage />;
+    return (
+    <section className="pt-16">
+      <BanquetPage />
+    </section>
+  );
 }

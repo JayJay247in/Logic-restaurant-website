@@ -19,5 +19,9 @@ export default async function Page() {
   }
 
   // Pass the fetched data as a prop to the client component
-  return <MenuPage menuData={menuData || []} />;
+  return (
+    <section className="pt-16">
+      <MenuPage menuData={menuData || []} />
+    </section>
+  );
 }
