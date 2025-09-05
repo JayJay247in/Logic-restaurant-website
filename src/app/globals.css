@@ -7,18 +7,12 @@
 @tailwind utilities;
 
 /* === Base Body Styles === */
-/* We apply fonts and base colors in the layout.tsx, this is for additions */
 body {
-  /* This enables smooth, nice-looking font rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* === Enhanced Focus Ring for Accessibility === */
-/* A clear, branded focus style for anyone navigating with a keyboard */
-*:focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2;
-}
+/* The focus-visible rule has been removed from here */
 
 /* === Custom Scrollbar Styling === */
 ::-webkit-scrollbar {
