@@ -12,13 +12,13 @@ interface AnimatedSectionProps {
 
 const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProps) => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Only trigger the animation once
-    threshold: 0.1,    // Trigger when 10% of the element is visible
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   const variants = {
-    hidden: { opacity: 0, y: 30 }, // Start invisible and slightly down
-    visible: { opacity: 1, y: 0 }, // Fade in and slide up to its natural position
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
   };
 
   return (

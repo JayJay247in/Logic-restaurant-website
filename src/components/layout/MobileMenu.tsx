@@ -1,6 +1,5 @@
 'use client';
 
-// 1. Import the `Variants` type from Framer Motion
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -15,8 +14,6 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ links, onClose }: MobileMenuProps) => {
-  
-  // 2. Define the variants objects with the explicit `Variants` type
   const backdropVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.3 } },
@@ -29,15 +26,13 @@ const MobileMenu = ({ links, onClose }: MobileMenuProps) => {
     exit: { x: '100%', transition: { duration: 0.2 } },
   };
 
-  // The custom function for staggering remains the same
   const linkVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: { 
         delay: i * 0.05 + 0.2, 
-        // 3. Define the 'ease' property within an array for proper typing
         ease: 'easeOut'
       },
     }),
@@ -46,31 +41,30 @@ const MobileMenu = ({ links, onClose }: MobileMenuProps) => {
   return (
     <>
       <motion.div
-        className="fixed inset-0 bg-black/40 z-40"
+        className="fixed inset-0 bg-dark/50 z-40"
         variants={backdropVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
         onClick={onClose}
       />
-
       <motion.div
-        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 p-8 flex flex-col"
+        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-light z-50 p-8 flex flex-col"
         variants={menuVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
         <div className="flex-1">
-          <h2 className="text-sm font-semibold text-gray-500 mb-6">Navigation</h2>
+          <h2 className="font-serif text-sm font-semibold text-secondary mb-8">Navigation</h2>
           <nav>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {links.map((link, i) => (
                 <motion.li key={link.href} custom={i} variants={linkVariants} initial="hidden" animate="visible">
                   <Link 
                     href={link.href}
                     onClick={onClose}
-                    className="text-2xl font-semibold text-gray-800 hover:text-yellow-500 transition-colors"
+                    className="text-3xl font-serif font-bold text-dark hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -80,11 +74,11 @@ const MobileMenu = ({ links, onClose }: MobileMenuProps) => {
           </nav>
         </div>
         
-        <div className="mt-8 border-t pt-6">
+        <div className="mt-8 border-t border-gray-200 pt-6">
           <Link
               href="/booking"
               onClick={onClose}
-              className="block text-center bg-yellow-500 text-white font-bold w-full py-3 px-8 rounded-md text-lg hover:bg-yellow-600 transition-colors"
+              className="block text-center bg-primary text-dark font-bold w-full py-4 px-8 rounded-lg text-lg hover:bg-primary-dark transition-colors"
           >
             Online Booking
           </Link>
@@ -94,4 +88,4 @@ const MobileMenu = ({ links, onClose }: MobileMenuProps) => {
   );
 };
 
-export default MobileMenu;
+export default MobileMenu

@@ -1,5 +1,13 @@
+/* === Imports === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Playfair+Display:wght@700;800&display=swap');
 @import "tailwindcss";
 
+/* === Tailwind Directives === */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Root Theme Variables === */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,43 +27,56 @@
   }
 }
 
+/* === Base Body Styles === */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  @apply bg-white text-dark;
+}
+
+/* === Accessibility: Focus Rings === */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}
+
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* === Gallery Page Custom Styles === */
-
-/* This is the main container for each image in the grid */
 .gallery-item {
-  position: relative; /* Essential for positioning children absolutely inside */
-  height: 20rem;      /* 320px, gives a consistent size */
-  overflow: hidden;   /* Hides the parts of the image that zoom out of bounds */
-  border-radius: 0.75rem; /* rounded-xl */
+  position: relative;
+  height: 20rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
   cursor: pointer;
-  /* Applying base shadow and transition using Tailwind's @apply for consistency, but you can use plain CSS too */
   @apply shadow-md transition-shadow duration-300;
 }
-
 .gallery-item:hover {
-  @apply shadow-2xl; /* Lifts the card on hover */
+  @apply shadow-2xl;
 }
-
-/* The image itself */
 .gallery-image {
   object-fit: cover;
   width: 100%;
   height: 100%;
   transition: transform 0.7s ease-out;
 }
-
-/* This is the key: when you hover the PARENT (.gallery-item), the CHILD (.gallery-image) transforms */
 .gallery-item:hover .gallery-image {
   transform: scale(1.1);
 }
-
-/* The dark overlay that appears on hover */
 .gallery-overlay {
   position: absolute;
   inset: 0;
@@ -63,40 +84,33 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease-out;
 }
-
 .gallery-item:hover .gallery-overlay {
-  opacity: 1; /* Fade the overlay in */
+  opacity: 1;
 }
-
-/* The text content that appears on hover */
 .gallery-text {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem; /* p-6 */
+  padding: 1.5rem;
   opacity: 0;
-  transform: translateY(1rem); /* Starts slightly below */
+  transform: translateY(1rem);
   transition: all 0.5s ease-out;
 }
-
 .gallery-text h3 {
   color: white;
   @apply font-bold text-xl;
 }
-
 .gallery-item:hover .gallery-text {
-  opacity: 1;              /* Fade the text in */
-  transform: translateY(0);  /* Slide the text up */
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* === Featured Menu Card on Home Page === */
-
+/* === Featured Menu Card (Home Page) === */
 .featured-card {
   transition: transform 0.3s ease-in-out;
 }
-
 .featured-card:hover {
-  transform: translateY(-0.5rem); /* This is the same as Tailwind's -translate-y-2 */
+  transform: translateY(-0.5rem);
 }

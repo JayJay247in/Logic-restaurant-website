@@ -8,10 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        'primary': '#F5B041', // Our main brand yellow
+        'primary-dark': '#D3912A',
+        'dark': '#1C1C1C',    // Rich black for text
+        'light': '#F8F9FA',   // Off-white for backgrounds
+        'secondary': '#6C757D', // Muted gray for secondary text
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'serif'],
       },
     },
   },

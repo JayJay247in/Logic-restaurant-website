@@ -15,10 +15,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* The Hero Section is already visually impactful, no animation needed here */}
       <HeroSection />
-
-      {/* Wrap the FeaturedMenu in our new AnimatedSection component */}
       <AnimatedSection>
         <FeaturedMenu menuItems={menuItems || []} />
       </AnimatedSection>
