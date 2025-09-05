@@ -1,47 +1,26 @@
-/* === Imports === */
+/* === Google Fonts Import === */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Playfair+Display:wght@700;800&display=swap');
-@import "tailwindcss";
 
-/* === Tailwind Directives === */
+/* === Standard Tailwind Directives === */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* === Root Theme Variables === */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 /* === Base Body Styles === */
+/* We apply fonts and base colors in the layout.tsx, this is for additions */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  @apply bg-white text-dark;
+  /* This enables smooth, nice-looking font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* === Accessibility: Focus Rings === */
+/* === Enhanced Focus Ring for Accessibility === */
+/* A clear, branded focus style for anyone navigating with a keyboard */
 *:focus-visible {
   @apply outline-none ring-2 ring-primary ring-offset-2;
 }
 
-/* === Custom Scrollbar === */
+/* === Custom Scrollbar Styling === */
 ::-webkit-scrollbar {
   width: 8px;
 }
