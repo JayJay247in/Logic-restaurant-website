@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
-import plugin from 'tailwindcss/plugin'; // Import the plugin function
 
+// The faulty plugin has been completely removed.
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -22,20 +22,6 @@ const config: Config = {
       },
     },
   },
-  // Add the plugin here
-  plugins: [
-    plugin(function({ addBase, theme }) {
-      addBase({
-        // Define the focus-visible styles directly in the theme
-        '*': {
-          '&:focus-visible': {
-            outline: 'none',
-            ring: `2px solid ${theme('colors.primary')}`,
-            'ring-offset': '2px',
-          },
-        },
-      });
-    }),
-  ],
+  plugins: [],
 };
 export default config;
