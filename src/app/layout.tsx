@@ -1,14 +1,12 @@
-// 'Metadata' import has been removed
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from 'react-hot-toast';
+import { ReactNode } from "react"; // It's better to import ReactNode directly
 
 const inter = Inter({ subsets: ["latin"] });
 
-// The 'metadata' object is still exported, which is the correct Next.js pattern.
-// We just don't need the 'Metadata' type import.
 export const metadata = {
   title: "Logic Restaurant",
   description: "A full-stack restaurant website built with Next.js",
@@ -17,7 +15,8 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  // Corrected type from React.Node to React.ReactNode
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -29,7 +28,9 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <main>{children}</main>
+        <main className="pt-16">
+            {children}
+        </main>
         <Footer />
       </body>
     </html>
